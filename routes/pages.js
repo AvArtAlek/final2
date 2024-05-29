@@ -6,5 +6,5 @@ pagesRouter.get("/", sendIndex);
 // routes/pages.js
 // Импорты и другие маршруты
 
-pagesRouter.get("/admin/**", checkCookiesJWT, checkAuth, sendDashboard);
+pagesRouter.get("/admin/**", sendDashboard);
 module.exports=pagesRouter;

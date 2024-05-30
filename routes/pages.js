@@ -1,10 +1,17 @@
-const pagesRouter = require("express").Router();
-const {sendIndex,sendDashboard}=require('../controllers/auth');
-const {checkAuth,checkCookiesJWT}=require('../middllewares/auth');
-pagesRouter.get("/", sendIndex);
+const { sendIndex, sendDashboard } = require('../controllers');
+const { checkAuth, checkCookiesJWT } = require('../middlewares');
+const pagesRouter = require('express').Router();
 
-// routes/pages.js
-// Импорты и другие маршруты
+pagesRouter.get(
+    '/',
+    sendIndex,
+)
 
-pagesRouter.get("/admin/**", sendDashboard);
-module.exports=pagesRouter;
+pagesRouter.get(
+    '/admin/**',
+    checkCookiesJWT,
+    checkAuth,
+    sendDashboard,
+)
+
+module.exports = pagesRouter
